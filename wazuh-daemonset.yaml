@@ -18,14 +18,15 @@ spec:
       containers:
       - name: wazuh-agent
         image: autobahnsecurity/wazuh-agent:v4.10.0
-        livenessProbe:
-          httpGet:
-            path: /healz
-            port: 5000
-          initialDelaySeconds: 40
-          periodSeconds: 10
-          timeoutSeconds: 10
-          failureThreshold: 5
+        #### disables due to always restarted and causing agent disconnected 
+        # livenessProbe:
+          # httpGet:
+            # path: /healz
+            # port: 5000
+          # initialDelaySeconds: 40
+          # periodSeconds: 10
+          # timeoutSeconds: 10
+          # failureThreshold: 5
         ports:
           - name: agent-http
             containerPort: 5000
