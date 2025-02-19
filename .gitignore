@@ -17,3 +17,4 @@ snyk-code.sarif
 .coverage*
 coverage.xml
 htmlcov
+wazuh-agent-apisecret.yaml
