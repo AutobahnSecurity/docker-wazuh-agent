@@ -17,7 +17,7 @@ spec:
       hostIPC: true
       containers:
       - name: wazuh-agent
-        image: kennyopennix/wazuh-agent:latest
+        image: autobahnsecurity/wazuh-agent:v4.10.0
         livenessProbe:
           httpGet:
             path: /healz
@@ -38,9 +38,15 @@ spec:
             memory: 512Mi
         env:
         - name: JOIN_MANAGER_MASTER_HOST
-          value: "wazuh.wazuh.svc.cluster.local"
+          valueFrom:
+           secretKeyRef:
+             name: wazuh-api-cred
+             key: hostname
         - name: JOIN_MANAGER_WORKER_HOST
-          value: "wazuh-workers.wazuh.svc.cluster.local"
+          valueFrom:
+           secretKeyRef:
+             name: wazuh-api-cred
+             key: hostname
         - name: JOIN_MANAGER_PROTOCOL
           value: "https"
         - name: NODE_NAME
@@ -48,7 +54,7 @@ spec:
             fieldRef:
               fieldPath: spec.nodeName
         - name: WAZUH_GROUPS
-          value: "demo"
+          value: "default"
         - name: JOIN_MANAGER_USER
           valueFrom:
            secretKeyRef:

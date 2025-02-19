@@ -142,6 +142,16 @@ docker run -d --name wazuh -v /:/rootfs:ro --net host --hostname ${HOSTNAME} \
 
 ## Run as Kubernetes DaemonSet
 
+Copy `wazuh-agent-apisecret.yaml.example` to `wazuh-agent-apisecret.yaml` 
+
+Update value on `wazuh-agent-apisecret.yaml`
+
+Apply `wazuh-agent-apisecret.yaml` before apply `wazuh-daemon-sets.yaml`
+
+```bash
+kubectl -f wazuh-agent-apisecret.yaml
+```
+
 Setup environments in `wazuh-daemon-sets.yaml` like above.
 
 Example:
